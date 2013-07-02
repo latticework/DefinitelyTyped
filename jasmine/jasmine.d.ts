@@ -29,9 +29,9 @@ declare module jasmine {
     var Clock: Clock;
 
     function any(aclass: any);
-    function createSpy(name: string): any;
+    function createSpy(name: string): Spy;
     function createSpyObj(baseName: string, methodNames: any[]): any;
-
+    function pp(value: any): string;
     function getEnv(): Env;
 
     interface Any {
@@ -61,7 +61,7 @@ declare module jasmine {
         assertInstalled(): void;
         isInstalled(): bool;
         installed: any;
-    };
+    }
 
     interface Env {
         setTimeout;
@@ -144,6 +144,12 @@ declare module jasmine {
     interface Matchers {
 
         new (env: Env, actual, spec: Env, isNot?: bool);
+
+        env: Env;
+        actual: any;
+        spec: Env;
+        isNot?: bool;
+        message(): any;
 
         toBe(expected): bool;
         toNotBe(expected): bool;
@@ -232,6 +238,8 @@ declare module jasmine {
     }
 
     interface Spy {
+        (...params: any[]): any;
+
         identity: string;
         calls: any[];
         mostRecentCall: { args: any[]; };
@@ -239,9 +247,9 @@ declare module jasmine {
         wasCalled: bool;
         callCount: number;
 
-        andReturn(value): void;
-        andCallThrough(): void;
-        andCallFake(fakeFunc: Function): void;
+        andReturn(value): Spy;
+        andCallThrough(): Spy;
+        andCallFake(fakeFunc: Function): Spy;
     }
 
     interface Suite {

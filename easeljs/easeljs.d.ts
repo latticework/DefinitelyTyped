@@ -18,7 +18,7 @@ interface NativeMouseEvent extends MouseEvent {
 
 }
 
-module createjs {
+declare module createjs {
     // :: base classes :: //
 
     export class DisplayObject {
@@ -155,13 +155,15 @@ module createjs {
         spriteSheet: SpriteSheet;
 
         // methods
-        constructor (spriteSheet: SpriteSheet);
+        constructor(spriteSheet: SpriteSheet);
         advance(): void;
         cache(): void;
         clone(): BitmapAnimation;
         getBounds(): Rectangle;
         gotoAndPlay(frameOrAnimation: string): void;
         gotoAndPlay(frameOrAnimation: number): void;
+        gotoAndStop(frameOrAnimation: string): void;
+        gotoAndStop (frameOrAnimation: number): void;
         play(): void;
         stop(): void;
         updateCache(): void;
@@ -482,7 +484,7 @@ module createjs {
         y: number;
 
         // methods
-        constructor (x: number, y: number);
+        constructor (x?: number, y?: number);
         clone(): Point;
         toString(): string;
     }
@@ -496,7 +498,7 @@ module createjs {
         height: number;
 
         // methods
-        constructor (x: number, y: number, width: number, height: number);
+        constructor (x?: number, y?: number, width?: number, height?: number);
         clone(): Rectangle;
         toString(): string;
     }
@@ -669,6 +671,17 @@ module createjs {
 
         // events
         tick: (timeElapsed: number) => any;
+    }
+    
+     export class TickerEvent {
+
+        // properties
+        target: Object;
+        type: string;
+        paused: bool;
+        delta: number;
+        time: number;
+        runTime : number;
     }
 
 

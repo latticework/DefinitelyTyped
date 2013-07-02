@@ -1,3 +1,8 @@
+// Type definitions for mocha 1.9.0
+// Project: http://visionmedia.github.io/mocha/
+// Definitions by: Kazi Manzur Rashid <https://github.com/kazimanzurrashid/>
+// DefinitelyTyped: https://github.com/borisyankov/DefinitelyTyped
+
 declare var describe : {
     (description: string, spec: () => void): void;
     only(description: string, spec: () => void): void;
@@ -15,6 +20,14 @@ declare var it: {
     timeout(ms: number);
 };
 
+declare function before(action: () => void): void;
+
+declare function before(action: (done: () => void) => void): void;
+
+declare function after(action: () => void): void;
+
+declare function after(action: (done: () => void) => void): void;
+
 declare function beforeEach(action: () => void): void;
 
 declare function beforeEach(action: (done: () => void) => void): void;
@@ -22,3 +35,4 @@ declare function beforeEach(action: (done: () => void) => void): void;
 declare function afterEach(action: () => void): void;
 
 declare function afterEach(action: (done: () => void) => void): void;
+
